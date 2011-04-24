@@ -1,14 +1,14 @@
 UNAME_INSTALL=install-$(shell uname -s)
 
 update:
-	hg pull -q --repository autojump
-	@hg update --repository autojump
-	hg pull -q --repository zsh-syntax-highlighting
-	@hg update --repository zsh-syntax-highlighting
-	hg pull -q --repository oh-my-zsh
-	@hg update --repository oh-my-zsh
-	hg pull -q --repository fizsh
-	@hg update --repository fizsh
+	git pull -q autojump
+	@git update autojump
+	git pull -q zsh-syntax-highlighting
+	@git update zsh-syntax-highlighting
+	git pull -q oh-my-zsh
+	@git update oh-my-zsh
+	git pull -q fizsh
+	@git update fizsh
 
 install: install-core $(UNAME_INSTALL)
 
@@ -25,13 +25,13 @@ install-core:
 	@echo "Creating functions.d directory iff neccessary (for autocompletion files)..."
 	@mkdir -p $(PWD)/functions.d # folder for autocompletion files
 	@echo "Checking out autojump iff neccessary..."
-	@ls $(PWD)/autojump > /dev/null 2> /dev/null || hg clone git://github.com/joelthelion/autojump.git
+	@ls $(PWD)/autojump > /dev/null 2> /dev/null || git clone https://github.com/joelthelion/autojump.git
 	@echo "Checking out zsh-syntax-highlighting iff neccessary..."
-	@ls $(PWD)/zsh-syntax-highlighting > /dev/null 2> /dev/null || hg clone git://github.com/nicoulaj/zsh-syntax-highlighting.git
+	@ls $(PWD)/zsh-syntax-highlighting > /dev/null 2> /dev/null || git clone https://github.com/nicoulaj/zsh-syntax-highlighting.git
 	@echo "Checking out oh-my-zsh iff neccessary..."
-	@ls $(PWD)/oh-my-zsh > /dev/null 2> /dev/null || hg clone git://github.com/robbyrussell/oh-my-zsh.git
+	@ls $(PWD)/oh-my-zsh > /dev/null 2> /dev/null || git clone https://github.com/robbyrussell/oh-my-zsh.git
 	@echo "Checking out fizsh iff neccessary..."
-	@ls $(PWD)/fizsh > /dev/null 2> /dev/null || hg clone git://fizsh.git.sourceforge.net/gitroot/fizsh/fizsh
+	@ls $(PWD)/fizsh > /dev/null 2> /dev/null || git clone git://fizsh.git.sourceforge.net/gitroot/fizsh/fizsh
 	@echo "Copying autojump autocompletion script..."
 	@cp -f $(PWD)/autojump/_j $(PWD)/functions.d/_j
 	@echo "Creating custom user files iff neccessary..."
